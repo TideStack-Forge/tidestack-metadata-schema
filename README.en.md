@@ -19,6 +19,7 @@ Pick the schema that matches a metadata file's suffix, then validate the JSON wi
 For example, a file ending in `.ui-model.json` is validated with `ui-model.schema.json`.
 
 ```bash
+# From the monorepo root; omit metadata-schema/ inside the standalone schema repository
 npx ajv-cli validate --spec=draft2020 -s ui-model.schema.json -d path/to/example.ui-model.json
 ```
 
@@ -59,6 +60,8 @@ Consumers that need to discover schemas dynamically should read `index.json` ins
 | `configuration-group` | Configuration group | No fixed suffix | `configuration-group.schema.json` |
 | `configuration-item` | Configuration item | `.config.json` | `configuration-item.schema.json` |
 | `configuration-group-item` | Configuration group item | `.config-group.json` | `configuration-group-item.schema.json` |
+
+Approval workflow `.workflow.json` describes resource metadata (`ApprovalWorkflowDefinitionMetadata`, formatVersion=1, with title/version/enabled/form). The formal document codec converts it to an internal V2 graph. `StructuredFlowDefinition` is not the public resource schema. Schema validation alone does not establish graph semantics, loading, or deployment.
 
 ## Versioning
 

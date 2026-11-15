@@ -19,6 +19,7 @@ TideStack/Ouroboros 元数据资源的 JSON Schema 定义。
 例如，文件名以 `.ui-model.json` 结尾时，应使用 `ui-model.schema.json` 校验。
 
 ```bash
+# 从 Ouroboros monorepo 根目录执行；独立 schema 仓库内去掉 metadata-schema/ 前缀
 npx ajv-cli validate --spec=draft2020 -s ui-model.schema.json -d path/to/example.ui-model.json
 ```
 
@@ -59,6 +60,8 @@ npx ajv-cli validate --spec=draft2020 -s ui-model.schema.json -d path/to/example
 | `configuration-group` | 配置分组 | 无固定后缀 | `configuration-group.schema.json` |
 | `configuration-item` | 配置项 | `.config.json` | `configuration-item.schema.json` |
 | `configuration-group-item` | 配置分组 | `.config-group.json` | `configuration-group-item.schema.json` |
+
+审批流 `.workflow.json` 对应 `ApprovalWorkflowDefinitionMetadata` 的资源元数据（formatVersion=1，含 title/version/enabled/form）；`ApprovalWorkflowDefinitionDocument` 通过正式 codec 转换为内部 V2 图。不要用内部 `StructuredFlowDefinition` 替代资源 Schema。Schema 只覆盖声明的结构约束，不证明图语义、加载或部署成功。
 
 ## 版本说明
 
