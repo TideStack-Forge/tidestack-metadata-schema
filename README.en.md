@@ -25,6 +25,12 @@ npx ajv-cli validate --spec=draft2020 -s ui-model.schema.json -d path/to/example
 
 Consumers that need to discover schemas dynamically should read `index.json` instead of hardcoding the table below.
 
+## Maintenance and distribution
+
+`metadata-schema/` in the platform repository is the maintained source. Run `python3 scripts/skills/sync_distribution.py` there to generate identical schema copies for the handbook, IDE schema package, Skills and both backend templates. Run the same command with `--check` to detect drift; edit the source rather than generated copies. The standalone schema repository publishes this directory as a self-contained bundle.
+
+The catalog has 32 metadata types. `supportingSchemas` lists additional referenced files; these are not extra metadata types. Keep all referenced files together for offline validation. Typed `.ui-schema.json` resources require `name` and `schema`; `ui-schema-content.schema.json` validates embedded components and legacy files in the `ui-schema/` resource directory.
+
 ## Schema Catalog
 
 | Type | Description | File Suffix | Schema |
@@ -37,6 +43,7 @@ Consumers that need to discover schemas dynamically should read `index.json` ins
 | `business` | Business model | `.business.json` | `business.schema.json` |
 | `logicflow` | Logic flow model | `.logicflow.json` | `logicflow.schema.json` |
 | `approval-workflow` | Approval workflow | `.workflow.json` | `approval-workflow.schema.json` |
+| `approval-form` | Custom approval form description | `.approval-form.json` | `approval-form.schema.json` |
 | `field-type` | Field type | `.field-type.json` | `field-type.schema.json` |
 | `flow-node` | Logic flow node | `.flow-node.json` | `flow-node.schema.json` |
 | `widget` | Widget definition | `.widget.json` | `widget.schema.json` |

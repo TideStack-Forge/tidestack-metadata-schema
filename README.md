@@ -25,6 +25,12 @@ npx ajv-cli validate --spec=draft2020 -s ui-model.schema.json -d path/to/example
 
 需要动态发现 schema 的消费者应读取 `index.json`，不要硬编码下方表格。
 
+## 维护与分发
+
+平台仓库的 `metadata-schema/` 是唯一维护源。在平台仓库运行 `python3 scripts/skills/sync_distribution.py`，生成手册、IDE Schema 包、Skills 与两份后端模板的同源副本；添加 `--check` 检查漂移。修改公共源后再同步，不直接维护副本。独立 Schema 仓库发布本目录，校验不依赖平台仓库。
+
+索引包含 32 类元数据；`supportingSchemas` 列出额外被引用的文件，不增加元数据类型。离线校验时将引用文件放在一起。typed `.ui-schema.json` 使用 `name/schema` 资源包装；`ui-schema-content.schema.json` 描述内嵌组件和旧 `ui-schema/` 资源目录中的直接组件内容。
+
 ## Schema 清单
 
 | 类型 | 展示名称 | 文件后缀 | Schema |
@@ -37,6 +43,7 @@ npx ajv-cli validate --spec=draft2020 -s ui-model.schema.json -d path/to/example
 | `business` | 业务模型 | `.business.json` | `business.schema.json` |
 | `logicflow` | 逻辑流模型 | `.logicflow.json` | `logicflow.schema.json` |
 | `approval-workflow` | 审批流 | `.workflow.json` | `approval-workflow.schema.json` |
+| `approval-form` | 自定义表单描述 | `.approval-form.json` | `approval-form.schema.json` |
 | `field-type` | 字段类型 | `.field-type.json` | `field-type.schema.json` |
 | `flow-node` | 逻辑流节点 | `.flow-node.json` | `flow-node.schema.json` |
 | `widget` | 组件定义 | `.widget.json` | `widget.schema.json` |

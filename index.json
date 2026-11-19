@@ -1,6 +1,6 @@
 {
-  "source": "bundled-handbook-docs",
-  "count": 31,
+  "source": "metadata-schema",
+  "count": 32,
   "entries": [
     {
       "type": "authority",
@@ -57,6 +57,13 @@
       "fileSuffix": ".workflow.json",
       "schema": "approval-workflow.schema.json",
       "path": "approval-workflow.schema.json"
+    },
+    {
+      "type": "approval-form",
+      "displayName": "自定义表单描述",
+      "fileSuffix": ".approval-form.json",
+      "schema": "approval-form.schema.json",
+      "path": "approval-form.schema.json"
     },
     {
       "type": "field-type",
@@ -219,5 +226,8 @@
       "schema": "configuration-group-item.schema.json",
       "path": "configuration-group-item.schema.json"
     }
+  ],
+  "supportingSchemas": [
+    "ui-schema-content.schema.json"
   ]
 }
